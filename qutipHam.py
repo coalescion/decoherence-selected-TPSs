@@ -39,3 +39,20 @@ def H_ising(n, c):
             H_ising += tensor_term 
     
     return H_ising/2
+
+def H_cnot(n):
+    '''
+        CNOT-style interaction Hamiltonian.
+        Control is always qubit 0; targets are the rest.
+    '''
+    H_cnot = 0
+    proj1 = basis(2, 1) * basis(2, 1).dag()  # |1><1|
+    for i in range(1, n):
+        ops = [qeye(2)] * n
+        ops[0] = proj1           # control qubit
+        ops[i] = sigmax()        # target qubit
+        H_cnot += tensor(ops)
+    return H_cnot
+
+
+    

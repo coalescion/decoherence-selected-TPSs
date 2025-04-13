@@ -17,7 +17,14 @@ def init_states(n):
     '''Parameters:
         n: Number of environmental Qubits.
 
-        Returns: Initial state to be evolved forward in time.'''
+        Returns: 
+        initial_states:
+            List of two initial states (Qobj) to be evolved forward in time: the
+            tensor |0><0| with maximally mixed environmental state and
+            tensor |1><1| with maximally mixed environmental state. 
+        tensor_initial states:
+            Same thing but with 2 x 2 x ... (n+1 times) dimension structure (Qobj split into individual qubits)
+            '''
 
     t_env_i = 1/(2**n)*tensor([qeye(2)]*n)
     env_i = (1/(2**n))*np.identity(2**n)
@@ -28,6 +35,10 @@ def init_states(n):
         sys_i = np.zeros((2, 2), int)
         sys_i[i][i] = 1
         sys_i = Qobj(sys_i)
+
+        # tensor |0><0| with maximally mixed environmental state
+        # tensor |1><1| with maximally mixed environmental state
+
         tensor_state = tensor(sys_i, t_env_i)
         tensor_initial_states.append(tensor_state)
         
@@ -37,3 +48,5 @@ def init_states(n):
         initial_states.append(state)
 
     return tensor_initial_states, initial_states
+
+print(init_states(3)[0])

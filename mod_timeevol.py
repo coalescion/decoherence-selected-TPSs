@@ -20,9 +20,10 @@ def characteristic_time(Hamiltonian):
         Hamiltonian: The hamiltonian matrix.
         
         Returns: The characteristic time.'''
-
+    Hamiltonian = Hamiltonian.full()
+    
     #Time inversely related to energy
-    return 1/(norm(Hamiltonian, 2))
+    return 1/(norm(Hamiltonian))
     
 
 # =============================== TIME EVOLUTION ===============================
@@ -36,7 +37,6 @@ def time_evolution(initial_state, H, t):
         t: Time to evolve to.
         
         Returns: Evolved state.'''
-    
     te_state = ((1j)*H*t).expm() * initial_state * (-(1j)*H*t).expm()
         
     return te_state

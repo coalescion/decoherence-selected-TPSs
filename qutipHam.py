@@ -23,6 +23,9 @@ def H_sb(n, c):
 def H_ising(n, c):
     '''
         Defining 1D ising model Hamiltonian w/ periodic boundary conditions. 
+        The coupling strength is given by c.
+        The Hamiltonian is defined as: H = (c/2) * sum_over_i(simgaz_i)*(sigmaz_(i+1))
+        No self-Hamiltonian, only interaction Hamiltonian!
     '''
     H_ising = 0
     for i in range(0, n):
@@ -38,7 +41,7 @@ def H_ising(n, c):
             tensor_term = tensor(term)
             H_ising += tensor_term 
     
-    return H_ising/2
+    return (c/2) * H_ising
 
 def H_cnot(n):
     '''

@@ -3,9 +3,7 @@ from qutip import *
 def H_sb(n, c):
     '''
         Defining spin bath model Hamiltonian.
-        Inputs:
-            - n: total number of qbs making up universe (system and environment)
-            - c: determines strength of interaction terms (can be generalized to a vector)
+        The coupling strength is given by c.
     '''
     H_sb = 0
     for i in range(0, n):
@@ -57,5 +55,29 @@ def H_cnot(n):
         H_cnot += tensor(ops)
     return H_cnot
 
+def H_heis(n, Jx, Jy, Jz):
+    '''
+    Constructs the 3D Heisenberg (XXZ) Hamiltonian with nearest-neighbor coupling. 
+    Jx, Jy, and Jz are the coupling strengths for (sigmax)(sigmax), (sigmay)(sigmay), (sigmaz)(sigmaz) interactions
+    '''
+    H = 0
+    for i in range(n - 1):
+        # simgax_i sigmax_{i+1}
+        sx_term = [qeye(2)] * n
+        sx_term[i] = sigmax()
+        sx_term[i + 1] = sigmax()
+        H += Jx * tensor(sx_term)
 
-    
+        # sigmay_i sigmay_{i+1}
+        sy_term = [qeye(2)] * n
+        sy_term[i] = sigmay()
+        sy_term[i + 1] = sigmay()
+        H += Jy * tensor(sy_term)
+
+        # sigmaz_i sigmaz_{i+1}
+        sz_term = [qeye(2)] * n
+        sz_term[i] = sigmaz()
+        sz_term[i + 1] = sigmaz()
+        H += Jz * tensor(sz_term)
+
+    return H

@@ -1,4 +1,4 @@
 # decoherence-selected-TPSs
-Code to select quasi-classical Tensor Product Structures using a Decoherence motivated criterion.
+What follows is the code used in Aiden Karpf's thesis, largely inhereted from blee000. ```HSF_v7.ipynb``` is the main jupyter notebook, and imports all relevant files and modules. More graphs displaying results are currently in progress, and will be locatecd in the "Results" folder.
 
-```HSF_v7.ipynb``` is the main jupyter notebook. ```find_qcTPS_PennyLane.ipynb``` is an older version of the code in ```HSF_v7.ipynb``` but written using the PennyLane package as opposed to the QuTip package. All other files are modules that are imported and used in the main jupyter notebook.
+Feel free to contact me if you have any questions.
